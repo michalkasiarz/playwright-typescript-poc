@@ -4,7 +4,10 @@
   "description": "Test automation PoC with Playwright",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
+    "test:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
+    "test:webkit": "playwright test --config=playwright.config.ts --project=Webkit",
+    "test:regression": "playwright test --config=playwright.config.ts --grep @regression --reporter=html"
   },
   "repository": {
     "type": "git",
