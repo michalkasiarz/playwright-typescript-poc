@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('Zero.webappsecurity basic test suite @regressionZeroWebApp @regression', () => {
+test.describe
+  .parallel('Zero.webappsecurity basic test suite @regressionZeroWebApp @regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('http://zero.webappsecurity.com/')
   })

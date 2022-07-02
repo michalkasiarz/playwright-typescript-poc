@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test'
 import { loadHomepage, assertTextForElement } from '../helpers'
 
-test.describe('Example.com basic test suite @regressionExample @regression', () => {
+test.describe
+  .parallel('Example.com basic test suite @regressionExample @regression', () => {
   test.beforeEach(async ({ page }) => {
     await loadHomepage(page, 'https://www.example.com')
   })
@@ -18,7 +19,7 @@ test.describe('Example.com basic test suite @regressionExample @regression', () 
   })
 
   test('Page title test', async ({ page }) => {
-    await expect(page).toHaveTitle('Example Domain')
+    await expect(page).toHaveTitle('Example Domains')
   })
 
   test('URL no redirection test', async ({ page }) => {
