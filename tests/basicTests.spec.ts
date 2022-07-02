@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('Example.com basic test suite', () => {
+test.describe('Example.com basic test suite @regressionExample', () => {
   test('Page heading test', async ({ page }) => {
     await page.goto('https://www.example.com')
     const pageHeading = await page.locator('h1')
@@ -30,7 +30,7 @@ test.describe('Example.com basic test suite', () => {
   })
 })
 
-test.describe('Zero.webappsecurity basic test suite', () => {
+test.describe('Zero.webappsecurity basic test suite @regressionZeroWebApp', () => {
   test('No credentials entered error message test', async ({ page }) => {
     await page.goto('http://zero.webappsecurity.com/')
     await page.click('#signin_button')
