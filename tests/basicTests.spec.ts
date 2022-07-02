@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { loadHomepage, assertTextForElement } from '../helpers'
 
-test.describe('Example.com basic test suite @regressionExample', () => {
+test.describe('Example.com basic test suite @regressionExample @regression', () => {
   test.beforeEach(async ({ page }) => {
     await loadHomepage(page, 'https://www.example.com')
   })
@@ -31,7 +31,7 @@ test.describe('Example.com basic test suite @regressionExample', () => {
   })
 })
 
-test.describe('Zero.webappsecurity basic test suite @regressionZeroWebApp', () => {
+test.describe('Zero.webappsecurity basic test suite @regressionZeroWebApp @regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('http://zero.webappsecurity.com/')
   })
