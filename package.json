@@ -1,0 +1,28 @@
+{
+  "name": "playwright-poc",
+  "version": "1.0.0",
+  "description": "Test automation PoC with Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michalkasiarz/playwright-poc.git"
+  },
+  "keywords": [
+    "playwright",
+    "test",
+    "automation"
+  ],
+  "author": "Michal Kasiarz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michalkasiarz/playwright-poc/issues"
+  },
+  "homepage": "https://github.com/michalkasiarz/playwright-poc#readme",
+  "dependencies": {
+    "@playwright/test": "^1.23.1",
+    "prettier": "^2.7.1"
+  }
+}
