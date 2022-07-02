@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test'
+import { loadHomepage, assertTextForElement } from '../helpers'
 
 test.describe('Example.com basic test suite @regressionExample', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://www.example.com')
+    await loadHomepage(page, 'https://www.example.com')
   })
 
   test('Page heading test', async ({ page }) => {
-    const pageHeading = await page.locator('h1')
     const pageHeadingScreenshot = await page.$('h1')
-    await expect(pageHeading).toHaveText('Example Domain')
+    await assertTextForElement(page, 'h1', 'Example Domain')
     await pageHeadingScreenshot.screenshot({ path: 'headingScreenshot.png' })
   })
 
