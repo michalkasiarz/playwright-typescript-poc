@@ -4,7 +4,9 @@ test.describe('Example.com basic test suite @regressionExample', () => {
   test('Page heading test', async ({ page }) => {
     await page.goto('https://www.example.com')
     const pageHeading = await page.locator('h1')
+    const pageHeadingScreenshot = await page.$('h1')
     await expect(pageHeading).toHaveText('Example Domain')
+    await pageHeadingScreenshot.screenshot({ path: 'headingScreenshot.png' })
   })
 
   test('Page heading visibility test', async ({ page }) => {
@@ -47,6 +49,8 @@ test.describe('Zero.webappsecurity basic test suite @regressionZeroWebApp', () =
     await page.type('#user_login', 'testuser')
     await page.type('#user_password', 'testpassword')
     await page.click('text=Sign in')
+
+    await page.screenshot({ path: 'screenshot.png', fullPage: true })
 
     const errorMessage = await page.locator('.alert-error')
     await expect(errorMessage).toHaveText('Login and/or password are wrong.')
