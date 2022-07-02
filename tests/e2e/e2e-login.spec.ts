@@ -15,7 +15,7 @@ test.describe('Login and logout flow', () => {
     await expect(errorMessage).toHaveText('Login and/or password are wrong.')
   })
 
-  test('Login - positive scenario', async ({ page }) => {
+  test('Login and logout - positive scenario', async ({ page }) => {
     await page.click('#signin_button')
     await page.type('#user_login', 'username')
     await page.type('#user_password', 'password')
@@ -25,5 +25,10 @@ test.describe('Login and logout flow', () => {
 
     const accountSummaryTab = await page.locator('#account_summary_tab')
     await expect(accountSummaryTab).toBeVisible()
+
+    await page.click('text=username')
+    await page.click('text=Logout')
+
+    await expect(page).toHaveURL('http://zero.webappsecurity.com/index.html')
   })
 })
