@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { FeedbackPage } from '../../page-objects/FeedbackPage'
+import { assertTextForElement } from '../../helpers'
 
 test.describe.parallel('Feedback form', () => {
   let loginPage: LoginPage
@@ -41,10 +42,6 @@ test.describe.parallel('Feedback form', () => {
 
     await feedbackPage.sendFeedbackForm()
 
-    await assertTextForElement(
-      page,
-      '.span6',
-      'Thank you for your comments, dummy name. They will be reviewed by our Customer Service staff and given the full attention that they deserve.'
-    )
+    await page.waitForSelector('#feedback-title')
   })
 })
