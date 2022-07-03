@@ -38,7 +38,7 @@ The report itself will be placed in the `playwright-report` catalog. In order to
 Also, there are additional node scripts prepared for testing with a specific browser.
 
 `npm run test:chrome` to run test against Chrome browser,  
-`npm run test:firefox` to run tests again Firefox and  
+`npm run test:firefox` to run tests against Firefox and  
 `npm run test:webkit` for Webkit, which is a Safari engine.
 
 # Playwright Inspector
