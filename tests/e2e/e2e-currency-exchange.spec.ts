@@ -1,37 +1,42 @@
 import { test, expect } from '@playwright/test'
+import { LandingPage } from '../../page-objects/LandingPage'
+import { LoginPage } from '../../page-objects/LoginPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
+import { PayBillsNavBarPage } from '../../page-objects/PayBillsNavBarPage'
+import { PurchaseForeignCurrencyPage } from '../../page-objects/PurchaseForeignCurrencyPage'
 
-test.describe.parallel('Payments tests', () => {
+test.describe.parallel('Currency exchagne tests', () => {
+  let landingPage: LandingPage
+  let loginPage: LoginPage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
+  let payBillsNavBarPage: PayBillsNavBarPage
+  let purchaseForeignCurrencyPage: PurchaseForeignCurrencyPage
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.click('#signin_button')
-    await page.type('#user_login', 'username')
-    await page.type('#user_password', 'password')
-    await page.click('text=Sign in')
+    landingPage = new LandingPage(page)
+    loginPage = new LoginPage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
+    payBillsNavBarPage = new PayBillsNavBarPage(page)
+    purchaseForeignCurrencyPage = new PurchaseForeignCurrencyPage(page)
 
+    await landingPage.visit()
+    await landingPage.clickOnSignIn()
+    await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })
 
   test('Should purchase foreign currency', async ({ page }) => {
-    await page.click('#pay_bills_tab')
-    await page.click('text="Purchase Foreign Currency"')
+    await topBarMenuLoggedInUserPage.clickPayBillsTab()
+    await payBillsNavBarPage.clickPurchaseForeignCurrencyTab()
 
-    const currencyDropdown = await page.locator('#pc_currency')
-    const todaysSellRate = await page.locator('#sp_sell_rate')
-    const amountInput = await page.locator('#pc_amount')
-    const selectedCurrencyRadioButton = await page.locator(
-      '#pc_inDollars_false'
-    )
-    const calculateCostsButton = await page.locator('#pc_calculate_costs')
-    const conversionAmount = await page.locator('#pc_conversion_amount')
-    const purchaseButton = await page.locator('#purchase_cash')
+    await purchaseForeignCurrencyPage.selectOptionForCurrencyDropdown('EUR')
+    await purchaseForeignCurrencyPage.validateTodaysSellRate('1 euro (EUR)')
+    await purchaseForeignCurrencyPage.enterAmount('15')
+    await purchaseForeignCurrencyPage.checkSelectedCurrencyRadioButton()
+    await purchaseForeignCurrencyPage.clickCalculateCostsButton()
+    await purchaseForeignCurrencyPage.validateConversionAmountText('euro (EUR)')
+    await purchaseForeignCurrencyPage.clickPurchaseButton()
 
-    await currencyDropdown.selectOption('EUR')
-    await expect(todaysSellRate).toContainText('EUR')
-    await amountInput.type('15')
-    await selectedCurrencyRadioButton.check()
-    await calculateCostsButton.click()
-    await expect(conversionAmount).toContainText('EUR')
-    await purchaseButton.click()
     await expect(page.locator('#alert_content')).toHaveText(
       'Foreign currency cash was successfully purchased.'
     )

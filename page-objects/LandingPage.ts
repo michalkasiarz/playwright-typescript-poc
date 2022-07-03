@@ -5,12 +5,18 @@ export class LandingPage {
   readonly signInButton: Locator
   readonly searchbox: Locator
   readonly feedbackLink: Locator
+  readonly usernameDropdown: Locator
+  readonly logoutLink: Locator
 
   constructor(page: Page) {
     this.page = page
     this.signInButton = page.locator('#signin_button')
     this.searchbox = page.locator('#searchTerm')
     this.feedbackLink = page.locator('#feedback')
+    this.usernameDropdown = page.locator(
+      '#settingsBox > ul > li:nth-child(3) > a'
+    )
+    this.logoutLink = page.locator('#logout_link')
   }
 
   async visit() {
@@ -19,6 +25,14 @@ export class LandingPage {
 
   async clickOnSignIn() {
     await this.signInButton.click()
+  }
+
+  async clickLogoutOption() {
+    await this.logoutLink.click()
+  }
+
+  async clickOnUsername() {
+    await this.usernameDropdown.click()
   }
 
   async clickOnFeedbackLink() {

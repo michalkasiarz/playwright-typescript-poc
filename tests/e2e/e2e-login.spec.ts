@@ -1,14 +1,17 @@
 import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { LandingPage } from '../../page-objects/LandingPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
 
 test.describe.parallel('Login and logout flow', () => {
   let loginPage: LoginPage
   let landingPage: LandingPage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
     landingPage = new LandingPage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
     await landingPage.visit()
   })
 
@@ -24,11 +27,10 @@ test.describe.parallel('Login and logout flow', () => {
 
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
 
-    const accountSummaryTab = await page.locator('#account_summary_tab')
-    await expect(accountSummaryTab).toBeVisible()
+    await topBarMenuLoggedInUserPage.accountSummaryTab.isVisible()
 
-    await page.click('text=username')
-    await page.click('text=Logout')
+    await landingPage.clickOnUsername()
+    await landingPage.clickLogoutOption()
 
     await expect(page).toHaveURL('http://zero.webappsecurity.com/index.html')
   })
