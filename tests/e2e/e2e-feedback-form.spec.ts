@@ -1,43 +1,50 @@
 import { test, expect } from '@playwright/test'
+import { LoginPage } from '../../page-objects/LoginPage'
+import { LandingPage } from '../../page-objects/LandingPage'
+import { FeedbackPage } from '../../page-objects/FeedbackPage'
 
 test.describe.parallel('Feedback form', () => {
+  let loginPage: LoginPage
+  let landingPage: LandingPage
+  let feedbackPage: FeedbackPage
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/')
+    loginPage = new LoginPage(page)
+    landingPage = new LandingPage(page)
+    feedbackPage = new FeedbackPage(page)
+    await landingPage.visit()
     await page.click('#feedback')
   })
 
   test('Reset feedback form test', async ({ page }) => {
-    const nameInput = await page.locator('#name')
-    const emailInput = await page.locator('#email')
-    const subjectInput = await page.locator('#subject')
-    const commentInput = await page.locator('#comment')
+    await feedbackPage.fillFeedbackForm(
+      'dummy name',
+      'dummy@email.com',
+      'dummy subject',
+      'dummy comment'
+    )
+    await feedbackPage.clearFeedbackForm()
 
-    await nameInput.type('dummy name')
-    await emailInput.type('dummy email')
-    await subjectInput.type('dummy subject')
-    await commentInput.type('dummy comment')
-
-    await page.click('input[name="clear"]')
-
-    await expect(nameInput).toBeEmpty()
-    await expect(emailInput).toBeEmpty()
-    await expect(subjectInput).toBeEmpty()
-    await expect(commentInput).toBeEmpty()
+    await expect(feedbackPage.nameInput).toBeEmpty()
+    await expect(feedbackPage.emailInput).toBeEmpty()
+    await expect(feedbackPage.subjectInput).toBeEmpty()
+    await expect(feedbackPage.commentInput).toBeEmpty()
   })
 
   test('Submit feedback form test', async ({ page }) => {
-    const nameInput = await page.locator('#name')
-    const emailInput = await page.locator('#email')
-    const subjectInput = await page.locator('#subject')
-    const commentInput = await page.locator('#comment')
+    await feedbackPage.fillFeedbackForm(
+      'dummy name',
+      'dummy@email.com',
+      'dummy subject',
+      'dummy comment'
+    )
 
-    await nameInput.type('dummy name')
-    await emailInput.type('dummy email')
-    await subjectInput.type('dummy subject')
-    await commentInput.type('dummy comment')
+    await feedbackPage.sendFeedbackForm()
 
-    await page.click('input[value="Send Message"]')
-
-    await page.waitForSelector('#feedback-title')
+    await assertTextForElement(
+      page,
+      '.span6',
+      'Thank you for your comments, dummy name. They will be reviewed by our Customer Service staff and given the full attention that they deserve.'
+    )
   })
 })
