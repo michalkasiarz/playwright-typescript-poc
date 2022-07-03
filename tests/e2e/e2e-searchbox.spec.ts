@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { validateNumberOfLinksFound } from '../../helpers'
 import { LandingPage } from '../../page-objects/LandingPage'
 
 test.describe.parallel('Searchbox tests', () => {
@@ -12,17 +13,17 @@ test.describe.parallel('Searchbox tests', () => {
     await landingPage.visit()
     await landingPage.searchForPhrase('bank')
 
-    const numberOfLinks = await page.locator('li > a')
-    await expect(numberOfLinks).toHaveCount(2)
+    await validateNumberOfLinksFound(page, 'li > a', 2)
   })
 
   test('Should not find any results', async ({ page }) => {
     await landingPage.visit()
     await landingPage.searchForPhrase('dummy')
 
-    const numberOfLinks = await page.locator(
-      'text="No results were found for the query: dummy"'
+    await validateNumberOfLinksFound(
+      page,
+      'text="No results were found for the query: dummy"',
+      1
     )
-    await expect(numberOfLinks).toHaveCount(1)
   })
 })
