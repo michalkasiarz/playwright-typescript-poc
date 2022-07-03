@@ -5,5 +5,5 @@ export async function loadHomepage(page, url) {
 }
 
 export async function assertTextForElement(page, selector, expectedText) {
-  await expect(page.locator(selector)).toHaveText(expectedText)
+  await expect(page.locator(selector)).toContainText(expectedText)
 }
