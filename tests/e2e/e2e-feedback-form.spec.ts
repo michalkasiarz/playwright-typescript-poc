@@ -26,10 +26,7 @@ test.describe.parallel('Feedback form', () => {
     )
     await feedbackPage.clearFeedbackForm()
 
-    await expect(feedbackPage.nameInput).toBeEmpty()
-    await expect(feedbackPage.emailInput).toBeEmpty()
-    await expect(feedbackPage.subjectInput).toBeEmpty()
-    await expect(feedbackPage.commentInput).toBeEmpty()
+    await feedbackPage.assertFormReset()
   })
 
   test('Submit feedback form test', async ({ page }) => {
