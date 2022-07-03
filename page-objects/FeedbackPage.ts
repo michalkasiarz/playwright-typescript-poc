@@ -38,4 +38,11 @@ export class FeedbackPage {
   async sendFeedbackForm() {
     await this.sendMessageButton.click()
   }
+
+  async assertFormReset() {
+    await expect(this.nameInput).toBeEmpty()
+    await expect(this.emailInput).toBeEmpty()
+    await expect(this.subjectInput).toBeEmpty()
+    await expect(this.commentInput).toBeEmpty()
+  }
 }
