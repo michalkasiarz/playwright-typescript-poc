@@ -1,36 +1,41 @@
 import { test, expect } from '@playwright/test'
+import { LandingPage } from '../../page-objects/LandingPage'
+import { LoginPage } from '../../page-objects/LoginPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
+import { PaySavedPayeePage } from '../../page-objects/PaySavedPayeePage'
 
 test.describe.parallel('Payments tests', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.click('#signin_button')
-    await page.type('#user_login', 'username')
-    await page.type('#user_password', 'password')
-    await page.click('text=Sign in')
+  let landingPage: LandingPage
+  let loginPage: LoginPage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
+  let paySavedPayeePage: PaySavedPayeePage
 
+  test.beforeEach(async ({ page }) => {
+    landingPage = new LandingPage(page)
+    loginPage = new LoginPage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
+    paySavedPayeePage = new PaySavedPayeePage(page)
+
+    await landingPage.visit()
+    await landingPage.clickOnSignIn()
+    await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })
 
   test('Should send new payment', async ({ page }) => {
-    await page.click('#pay_bills_tab')
-    let payeeDropdown = await page.locator('#sp_payee')
-    let payeeDetailsButton = await page.locator('#sp_get_payee_details')
-    let payeeDetailsText = await page.locator('#sp_payee_details')
-    let accountDropdown = await page.locator('#sp_account')
-    let amountInput = await page.locator('#sp_amount')
-    let datepickerInput = await page.locator('#sp_date')
-    let descriptionInput = await page.locator('#sp_description')
-    const payButton = await page.locator('#pay_saved_payees')
+    await topBarMenuLoggedInUserPage.clickPayBillsTab()
 
-    await payeeDropdown.selectOption('apple')
-    await payeeDetailsButton.click()
-    await payeeDetailsText.isVisible()
+    await paySavedPayeePage.selectOptionForPayeeDropdown('apple')
+    await paySavedPayeePage.clickPayeeDetailsButton()
+    await paySavedPayeePage.validateIfPayeeDetailsAreVisible()
     // selecting Brokerage
-    await accountDropdown.selectOption('6')
-    await amountInput.type('12')
-    await datepickerInput.type('2022-07-07')
-    await descriptionInput.type('test of payments')
-    await payButton.click()
+    await paySavedPayeePage.selectOptionForAccountDropdown('6')
+    await paySavedPayeePage.enterAmountDateAndDescription(
+      '12',
+      '2022-07-07',
+      'test of payments'
+    )
+    await paySavedPayeePage.clickPayButton()
 
     const messageAfterPayment = await page.locator('#alert_content > span')
     await expect(messageAfterPayment).toBeVisible()
