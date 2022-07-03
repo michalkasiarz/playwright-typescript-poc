@@ -13,7 +13,7 @@ test.describe.parallel('Feedback form', () => {
     landingPage = new LandingPage(page)
     feedbackPage = new FeedbackPage(page)
     await landingPage.visit()
-    await page.click('#feedback')
+    await landingPage.clickOnFeedbackLink()
   })
 
   test('Reset feedback form test', async ({ page }) => {
