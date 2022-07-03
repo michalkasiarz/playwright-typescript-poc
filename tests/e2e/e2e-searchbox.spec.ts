@@ -1,21 +1,28 @@
 import { test, expect } from '@playwright/test'
+import { LandingPage } from '../../page-objects/LandingPage'
 
 test.describe.parallel('Searchbox tests', () => {
+  let landingPage: LandingPage
+
+  test.beforeEach(async ({ page }) => {
+    landingPage = new LandingPage(page)
+  })
+
   test('Should find test results', async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.type('#searchTerm', 'bank')
-    await page.keyboard.press('Enter')
+    await landingPage.visit()
+    await landingPage.searchForPhrase('bank')
 
     const numberOfLinks = await page.locator('li > a')
     await expect(numberOfLinks).toHaveCount(2)
   })
 
   test('Should not find any results', async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.type('#searchTerm', 'dummy')
-    await page.keyboard.press('Enter')
+    await landingPage.visit()
+    await landingPage.searchForPhrase('dummy')
 
-    const numberOfLinks = await page.locator('text="No results were found for the query: dummy"')
+    const numberOfLinks = await page.locator(
+      'text="No results were found for the query: dummy"'
+    )
     await expect(numberOfLinks).toHaveCount(1)
   })
 })
