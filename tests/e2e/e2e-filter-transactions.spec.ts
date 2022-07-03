@@ -1,33 +1,45 @@
 import { test, expect } from '@playwright/test'
+import { LandingPage } from '../../page-objects/LandingPage'
+import { LoginPage } from '../../page-objects/LoginPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
+import { AccountActivityShowTransactionsPage } from '../../page-objects/AccountActivityShowTransactionsPage'
 
 test.describe.parallel('Filter transactions tests', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('http://zero.webappsecurity.com/index.html')
-    await page.click('#signin_button')
-    await page.type('#user_login', 'username')
-    await page.type('#user_password', 'password')
-    await page.click('text=Sign in')
+  let accountActivityShowTransactionsPage: AccountActivityShowTransactionsPage
+  let landingPage: LandingPage
+  let loginPage: LoginPage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
 
+  test.beforeEach(async ({ page }) => {
+    accountActivityShowTransactionsPage =
+      new AccountActivityShowTransactionsPage(page)
+    landingPage = new LandingPage(page)
+    loginPage = new LoginPage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
+
+    await landingPage.visit()
+    await landingPage.clickOnSignIn()
+    await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })
 
   test('Verify results for each account', async ({ page }) => {
-    await page.click('#account_activity_tab')
-    let accountDropdown = await page.locator('#aa_accountId')
+    await topBarMenuLoggedInUserPage.clickAccountActivityTab()
 
     // selecting Checking account
-    await accountDropdown.selectOption('2')
-    const checkingAccount = await page.locator(
-      '#all_transactions_for_account tbody tr'
+    await accountActivityShowTransactionsPage.selectOptionForAccountDropdown(
+      '2'
     )
-    await expect(checkingAccount).toHaveCount(3)
-
+    await accountActivityShowTransactionsPage.validateNumberOfTransactions(3)
     // selecting Load account
-    await accountDropdown.selectOption('4')
-    await expect(checkingAccount).toHaveCount(2)
-
+    await accountActivityShowTransactionsPage.selectOptionForAccountDropdown(
+      '4'
+    )
+    await accountActivityShowTransactionsPage.validateNumberOfTransactions(2)
     // selecting Credit Card account
-    await accountDropdown.selectOption('5')
-    await expect(page.locator('.well')).toHaveText('No results.')
+    await accountActivityShowTransactionsPage.selectOptionForAccountDropdown(
+      '5'
+    )
+    await accountActivityShowTransactionsPage.validateNoTransactionsListed()
   })
 })
