@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test'
+import { AccountActivityShowTransactionsPage } from '../../page-objects/AccountActivityShowTransactionsPage'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
-import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
-import { AccountActivityShowTransactionsPage } from '../../page-objects/AccountActivityShowTransactionsPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
 test.describe.parallel('Filter transactions tests', () => {
   let accountActivityShowTransactionsPage: AccountActivityShowTransactionsPage
@@ -18,7 +18,7 @@ test.describe.parallel('Filter transactions tests', () => {
     topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
 
     await landingPage.visit()
-    await landingPage.clickOnSignIn()
+    await landingPage.clickSignIn()
     await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })

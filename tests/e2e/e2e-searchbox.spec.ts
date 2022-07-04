@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { validateNumberOfLinksFound } from '../../helpers'
 import { LandingPage } from '../../page-objects/LandingPage'
+import { validateNumberOfLinksFound } from '../../helpers'
 
 test.describe.parallel('Searchbox tests', () => {
   let landingPage: LandingPage
