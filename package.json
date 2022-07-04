@@ -32,7 +32,12 @@
   },
   "homepage": "https://github.com/michalkasiarz/playwright-poc#readme",
   "dependencies": {
-    "@playwright/test": "^1.23.1",
+    "@playwright/test": "^1.23.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.4",
+    "@typescript-eslint/parser": "^5.30.4",
+    "eslint": "^8.19.0",
     "prettier": "^2.7.1"
   }
 }
