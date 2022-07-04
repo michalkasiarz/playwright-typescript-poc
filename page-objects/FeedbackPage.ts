@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class FeedbackPage {
-  readonly page: Page
+import { BasePage } from '../page-objects/BasePage'
+
+export class FeedbackPage extends BasePage {
   readonly clearButton: Locator
   readonly commentInput: Locator
   readonly emailInput: Locator
@@ -10,7 +11,7 @@ export class FeedbackPage {
   readonly subjectInput: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.clearButton = page.locator("input[name='clear']")
     this.commentInput = page.locator('#comment')
     this.emailInput = page.locator('#email')

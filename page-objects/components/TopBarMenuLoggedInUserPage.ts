@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class TopBarMenuLoggedInUserPage {
-  readonly page: Page
+import { BasePage } from '../BasePage'
+
+export class TopBarMenuLoggedInUserPage extends BasePage {
   readonly accountSummaryTab: Locator
   readonly accountActivityTab: Locator
   readonly transferFundsTab: Locator
@@ -10,7 +11,7 @@ export class TopBarMenuLoggedInUserPage {
   readonly onlineStatementsTab: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.accountSummaryTab = page.locator('#account_summary_tab')
     this.accountActivityTab = page.locator('#account_activity_tab')
     this.transferFundsTab = page.locator('#transfer_funds_tab')

@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class PaySavedPayeePage {
-  readonly page: Page
+import { BasePage } from '../page-objects/BasePage'
+
+export class PaySavedPayeePage extends BasePage {
   readonly accountDropdown: Locator
   readonly amountInput: Locator
   readonly datepickerInput: Locator
@@ -12,7 +13,7 @@ export class PaySavedPayeePage {
   readonly payeeDetailsText: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.accountDropdown = page.locator('#sp_account')
     this.amountInput = page.locator('#sp_amount')
     this.datepickerInput = page.locator('#sp_date')

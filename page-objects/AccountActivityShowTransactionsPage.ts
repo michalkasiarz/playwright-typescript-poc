@@ -1,13 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class AccountActivityShowTransactionsPage {
-  readonly page: Page
+import { BasePage } from '../page-objects/BasePage'
+export class AccountActivityShowTransactionsPage extends BasePage {
   readonly accountDropdown: Locator
   readonly noResultsFoundInfo: Locator
   readonly singleTransactionRecord: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.accountDropdown = page.locator('#aa_accountId')
     this.noResultsFoundInfo = page.locator('.well')
     this.singleTransactionRecord = page.locator(
