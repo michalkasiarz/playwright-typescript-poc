@@ -15,15 +15,19 @@ export class PayBillsNavBarPage {
     )
   }
 
-  async clickAddNewPayeeTab() {
-    await this.addNewPayeeTab.click()
-  }
-
-  async clickPaySavedPayeeTab() {
-    await this.paySavedPayeeTab.click()
-  }
-
-  async clickPurchaseForeignCurrencyTab() {
-    await this.purchaseForeignCurrencyTab.click()
+  async clickTab(tabname: string) {
+    switch (tabname) {
+      case 'Add New Payee':
+        await this.addNewPayeeTab.click()
+        break
+      case 'Pay Saved Payee':
+        await this.paySavedPayeeTab.click()
+        break
+      case 'Purchase Foreign Currency':
+        await this.purchaseForeignCurrencyTab.click()
+        break
+      default:
+        throw new Error('Could not find a tab with a given name')
+    }
   }
 }
