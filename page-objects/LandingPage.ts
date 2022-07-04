@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class LandingPage {
-  readonly page: Page
+import { BasePage } from '../page-objects/BasePage'
+
+export class LandingPage extends BasePage {
   readonly feedbackLink: Locator
   readonly logoutLink: Locator
   readonly searchbox: Locator
@@ -9,7 +10,7 @@ export class LandingPage {
   readonly usernameDropdown: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.feedbackLink = page.locator('#feedback')
     this.logoutLink = page.locator('#logout_link')
     this.searchbox = page.locator('#searchTerm')

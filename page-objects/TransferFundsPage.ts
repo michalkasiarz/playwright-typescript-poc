@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class TransferFundsPage {
-  readonly page: Page
+import { BasePage } from '../page-objects/BasePage'
+
+export class TransferFundsPage extends BasePage {
   readonly amountInput: Locator
   readonly descriptionInput: Locator
   readonly fromAccountDropdown: Locator
@@ -9,7 +10,7 @@ export class TransferFundsPage {
   readonly toAccountDropdown: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.amountInput = page.locator('#tf_amount')
     this.descriptionInput = page.locator('#tf_description')
     this.fromAccountDropdown = page.locator('#tf_fromAccountId')

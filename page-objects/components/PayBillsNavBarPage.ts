@@ -1,13 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-export class PayBillsNavBarPage {
-  readonly page: Page
+import { BasePage } from '../BasePage'
+
+export class PayBillsNavBarPage extends BasePage{
   readonly addNewPayeeTab: Locator
   readonly paySavedPayeeTab: Locator
   readonly purchaseForeignCurrencyTab: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.addNewPayeeTab = page.locator('text="Add New Payee"')
     this.paySavedPayeeTab = page.locator('text="Pay Saved Payee"')
     this.purchaseForeignCurrencyTab = page.locator(
