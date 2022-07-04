@@ -7,7 +7,7 @@
     "test:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
     "test:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
     "test:webkit": "playwright test --config=playwright.config.ts --project=Webkit",
-    "test:e2e": "playwright test --config=e2e.config.ts --project=Chromium",
+    "test:e2e": "playwright test --config=e2e.config.ts --reporter=html",
     "test:e2e:exchange": "playwright test --config=e2e.config.ts --grep @exchange",
     "test:e2e:feedback": "playwright test --config=e2e.config.ts --grep @feedback",
     "test:e2e:funds": "playwright test --config=e2e.config.ts --grep @funds",
