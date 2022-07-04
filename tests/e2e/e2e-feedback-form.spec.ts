@@ -3,7 +3,7 @@ import { FeedbackPage } from '../../page-objects/FeedbackPage'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
 
-test.describe.parallel('Feedback form', () => {
+test.describe.parallel('Feedback form @feedback', () => {
   let feedbackPage: FeedbackPage
   let landingPage: LandingPage
   let loginPage: LoginPage

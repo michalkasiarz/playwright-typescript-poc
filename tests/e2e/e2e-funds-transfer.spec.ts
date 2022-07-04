@@ -4,7 +4,7 @@ import { LoginPage } from '../../page-objects/LoginPage'
 import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 import { TransferFundsPage } from '../../page-objects/TransferFundsPage'
 
-test.describe.parallel('Funds transfer tests', () => {
+test.describe.parallel('Funds transfer tests @funds', () => {
   let landingPage: LandingPage
   let loginPage: LoginPage
   let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage

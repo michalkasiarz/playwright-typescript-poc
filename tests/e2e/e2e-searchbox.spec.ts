@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { validateNumberOfLinksFound } from '../../helpers'
 
-test.describe.parallel('Searchbox tests', () => {
+test.describe.parallel('Searchbox tests @searchbox', () => {
   let landingPage: LandingPage
 
   test.beforeEach(async ({ page }) => {

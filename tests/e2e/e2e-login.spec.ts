@@ -3,7 +3,7 @@ import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
-test.describe.parallel('Login and logout flow', () => {
+test.describe.parallel('Login and logout flow @login', () => {
   let landingPage: LandingPage
   let loginPage: LoginPage
   let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
