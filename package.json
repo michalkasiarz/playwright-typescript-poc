@@ -1,14 +1,20 @@
 {
   "name": "playwright-poc",
   "version": "1.0.0",
-  "description": "Test automation PoC with Playwright",
+  "description": "Test core repo with Playwright and TypeScript",
   "main": "index.js",
   "scripts": {
     "test:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
     "test:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
     "test:webkit": "playwright test --config=playwright.config.ts --project=Webkit",
-    "test:regression": "playwright test --config=playwright.config.ts --grep @regression --reporter=html",
-    "test:e2e": "playwright test --config=e2e.config.ts --project=Chromium"
+    "test:e2e": "playwright test --config=e2e.config.ts --project=Chromium",
+    "test:e2e:exchange": "playwright test --config=e2e.config.ts --grep @exchange",
+    "test:e2e:feedback": "playwright test --config=e2e.config.ts --grep @feedback",
+    "test:e2e:funds": "playwright test --config=e2e.config.ts --grep @funds",
+    "test:e2e:login": "playwright test --config=e2e.config.ts --grep @login",
+    "test:e2e:payments": "playwright test --config=e2e.config.ts --grep @payments",
+    "test:e2e:searchbox": "playwright test --config=e2e.config.ts --grep @feedback",
+    "test:e2e:transactions": "playwright test --config=e2e.config.ts --grep @transactions"
   },
   "repository": {
     "type": "git",
