@@ -1,4 +1,4 @@
-# playwright-poc
+# playwright-typescript-poc
 
 :hotsprings: Language: TypeScript  
 :heavy_check_mark: Frameworks: Playwright  
