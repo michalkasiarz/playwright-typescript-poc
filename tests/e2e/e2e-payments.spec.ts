@@ -23,7 +23,7 @@ test.describe.parallel('Payments tests', () => {
   })
 
   test('Should send new payment', async ({ page }) => {
-    await topBarMenuLoggedInUserPage.clickPayBillsTab()
+    await topBarMenuLoggedInUserPage.clickTab('Pay Bills')
 
     await paySavedPayeePage.selectOptionForPayeeDropdown('apple')
     await paySavedPayeePage.clickPayeeDetailsButton()

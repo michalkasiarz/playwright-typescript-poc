@@ -24,7 +24,7 @@ test.describe.parallel('Filter transactions tests', () => {
   })
 
   test('Verify results for each account', async ({ page }) => {
-    await topBarMenuLoggedInUserPage.clickAccountActivityTab()
+    await topBarMenuLoggedInUserPage.clickTab('Account Activity')
 
     // selecting Checking account
     await accountActivityShowTransactionsPage.selectOptionForAccountDropdown(

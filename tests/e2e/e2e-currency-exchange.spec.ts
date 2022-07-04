@@ -26,8 +26,8 @@ test.describe.parallel('Currency exchagne tests', () => {
   })
 
   test('Should purchase foreign currency', async ({ page }) => {
-    await topBarMenuLoggedInUserPage.clickPayBillsTab()
-    await payBillsNavBarPage.clickPurchaseForeignCurrencyTab()
+    await topBarMenuLoggedInUserPage.clickTab('Pay Bills')
+    await payBillsNavBarPage.clickTab('Purchase Foreign Currency')
 
     await purchaseForeignCurrencyPage.selectOptionForCurrencyDropdown('EUR')
     await purchaseForeignCurrencyPage.validateTodaysSellRate('1 euro (EUR)')
