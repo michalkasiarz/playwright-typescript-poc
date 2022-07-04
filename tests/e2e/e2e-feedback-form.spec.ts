@@ -1,19 +1,19 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../../page-objects/LoginPage'
-import { LandingPage } from '../../page-objects/LandingPage'
 import { FeedbackPage } from '../../page-objects/FeedbackPage'
+import { LandingPage } from '../../page-objects/LandingPage'
+import { LoginPage } from '../../page-objects/LoginPage'
 
 test.describe.parallel('Feedback form', () => {
-  let loginPage: LoginPage
-  let landingPage: LandingPage
   let feedbackPage: FeedbackPage
+  let landingPage: LandingPage
+  let loginPage: LoginPage
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page)
-    landingPage = new LandingPage(page)
     feedbackPage = new FeedbackPage(page)
+    landingPage = new LandingPage(page)
+    loginPage = new LoginPage(page)
     await landingPage.visit()
-    await landingPage.clickOnFeedbackLink()
+    await landingPage.clickFeedbackLink()
   })
 
   test('Reset feedback form test', async ({ page }) => {

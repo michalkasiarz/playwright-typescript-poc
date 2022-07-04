@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
-import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 import { TransferFundsPage } from '../../page-objects/TransferFundsPage'
 
 test.describe.parallel('Funds transfer tests', () => {
@@ -17,7 +17,7 @@ test.describe.parallel('Funds transfer tests', () => {
     transferFundsPage = new TransferFundsPage(page)
 
     await landingPage.visit()
-    await landingPage.clickOnSignIn()
+    await landingPage.clickSignIn()
     await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })

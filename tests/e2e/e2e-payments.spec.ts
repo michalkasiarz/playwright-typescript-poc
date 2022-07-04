@@ -1,23 +1,23 @@
 import { test, expect } from '@playwright/test'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
-import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
 import { PaySavedPayeePage } from '../../page-objects/PaySavedPayeePage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
 test.describe.parallel('Payments tests', () => {
   let landingPage: LandingPage
   let loginPage: LoginPage
-  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
   let paySavedPayeePage: PaySavedPayeePage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
 
   test.beforeEach(async ({ page }) => {
     landingPage = new LandingPage(page)
     loginPage = new LoginPage(page)
-    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
     paySavedPayeePage = new PaySavedPayeePage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
 
     await landingPage.visit()
-    await landingPage.clickOnSignIn()
+    await landingPage.clickSignIn()
     await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })

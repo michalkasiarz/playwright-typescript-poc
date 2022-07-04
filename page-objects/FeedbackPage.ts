@@ -2,21 +2,32 @@ import { expect, Locator, Page } from '@playwright/test'
 
 export class FeedbackPage {
   readonly page: Page
-  readonly nameInput: Locator
-  readonly emailInput: Locator
-  readonly subjectInput: Locator
-  readonly commentInput: Locator
   readonly clearButton: Locator
+  readonly commentInput: Locator
+  readonly emailInput: Locator
+  readonly nameInput: Locator
   readonly sendMessageButton: Locator
+  readonly subjectInput: Locator
 
   constructor(page: Page) {
     this.page = page
-    this.nameInput = page.locator('#name')
-    this.emailInput = page.locator('#email')
-    this.subjectInput = page.locator('#subject')
-    this.commentInput = page.locator('#comment')
     this.clearButton = page.locator("input[name='clear']")
+    this.commentInput = page.locator('#comment')
+    this.emailInput = page.locator('#email')
+    this.nameInput = page.locator('#name')
     this.sendMessageButton = page.locator("input[value='Send Message']")
+    this.subjectInput = page.locator('#subject')
+  }
+
+  async assertFormReset() {
+    await expect(this.nameInput).toBeEmpty()
+    await expect(this.emailInput).toBeEmpty()
+    await expect(this.subjectInput).toBeEmpty()
+    await expect(this.commentInput).toBeEmpty()
+  }
+
+  async clearFeedbackForm() {
+    await this.clearButton.click()
   }
 
   async fillFeedbackForm(
@@ -31,18 +42,7 @@ export class FeedbackPage {
     await this.commentInput.type(comment)
   }
 
-  async clearFeedbackForm() {
-    await this.clearButton.click()
-  }
-
   async sendFeedbackForm() {
     await this.sendMessageButton.click()
-  }
-
-  async assertFormReset() {
-    await expect(this.nameInput).toBeEmpty()
-    await expect(this.emailInput).toBeEmpty()
-    await expect(this.subjectInput).toBeEmpty()
-    await expect(this.commentInput).toBeEmpty()
   }
 }

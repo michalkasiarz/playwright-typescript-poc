@@ -1,26 +1,26 @@
 import { test, expect } from '@playwright/test'
 import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
-import { TopBarMenuLoggedInUserPage } from '../../page-objects/TopBarMenuLoggedInUserPage'
-import { PayBillsNavBarPage } from '../../page-objects/PayBillsNavBarPage'
+import { PayBillsNavBarPage } from '../../page-objects/components/PayBillsNavBarPage'
 import { PurchaseForeignCurrencyPage } from '../../page-objects/PurchaseForeignCurrencyPage'
+import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
 test.describe.parallel('Currency exchagne tests', () => {
   let landingPage: LandingPage
   let loginPage: LoginPage
-  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
   let payBillsNavBarPage: PayBillsNavBarPage
   let purchaseForeignCurrencyPage: PurchaseForeignCurrencyPage
+  let topBarMenuLoggedInUserPage: TopBarMenuLoggedInUserPage
 
   test.beforeEach(async ({ page }) => {
     landingPage = new LandingPage(page)
     loginPage = new LoginPage(page)
-    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
     payBillsNavBarPage = new PayBillsNavBarPage(page)
     purchaseForeignCurrencyPage = new PurchaseForeignCurrencyPage(page)
+    topBarMenuLoggedInUserPage = new TopBarMenuLoggedInUserPage(page)
 
     await landingPage.visit()
-    await landingPage.clickOnSignIn()
+    await landingPage.clickSignIn()
     await loginPage.login('username', 'password')
     await page.goto('http://zero.webappsecurity.com/bank/account-summary.html')
   })
