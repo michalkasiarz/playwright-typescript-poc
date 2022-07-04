@@ -2,45 +2,45 @@ import { expect, Locator, Page } from '@playwright/test'
 
 export class LandingPage {
   readonly page: Page
-  readonly signInButton: Locator
-  readonly searchbox: Locator
   readonly feedbackLink: Locator
-  readonly usernameDropdown: Locator
   readonly logoutLink: Locator
+  readonly searchbox: Locator
+  readonly signInButton: Locator
+  readonly usernameDropdown: Locator
 
   constructor(page: Page) {
     this.page = page
-    this.signInButton = page.locator('#signin_button')
-    this.searchbox = page.locator('#searchTerm')
     this.feedbackLink = page.locator('#feedback')
+    this.logoutLink = page.locator('#logout_link')
+    this.searchbox = page.locator('#searchTerm')
+    this.signInButton = page.locator('#signin_button')
     this.usernameDropdown = page.locator(
       '#settingsBox > ul > li:nth-child(3) > a'
     )
-    this.logoutLink = page.locator('#logout_link')
   }
 
-  async visit() {
-    await this.page.goto('http://zero.webappsecurity.com/')
-  }
-
-  async clickOnSignIn() {
-    await this.signInButton.click()
+  async clickFeedbackLink() {
+    await this.feedbackLink.click()
   }
 
   async clickLogoutOption() {
     await this.logoutLink.click()
   }
 
-  async clickOnUsername() {
-    await this.usernameDropdown.click()
+  async clickSignIn() {
+    await this.signInButton.click()
   }
 
-  async clickOnFeedbackLink() {
-    await this.feedbackLink.click()
+  async clickUsername() {
+    await this.usernameDropdown.click()
   }
 
   async searchForPhrase(phrase: string) {
     await this.searchbox.type(phrase)
     await this.page.keyboard.press('Enter')
+  }
+
+  async visit() {
+    await this.page.goto('http://zero.webappsecurity.com/')
   }
 }
