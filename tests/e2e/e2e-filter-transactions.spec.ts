@@ -4,7 +4,7 @@ import { LandingPage } from '../../page-objects/LandingPage'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
-test.describe.parallel('Filter transactions tests', () => {
+test.describe.parallel('Filter transactions tests @transactions', () => {
   let accountActivityShowTransactionsPage: AccountActivityShowTransactionsPage
   let landingPage: LandingPage
   let loginPage: LoginPage

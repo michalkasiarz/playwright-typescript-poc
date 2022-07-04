@@ -5,7 +5,7 @@ import { PayBillsNavBarPage } from '../../page-objects/components/PayBillsNavBar
 import { PurchaseForeignCurrencyPage } from '../../page-objects/PurchaseForeignCurrencyPage'
 import { TopBarMenuLoggedInUserPage } from '../../page-objects/components/TopBarMenuLoggedInUserPage'
 
-test.describe.parallel('Currency exchagne tests', () => {
+test.describe.parallel('Currency exchagne tests @exchange', () => {
   let landingPage: LandingPage
   let loginPage: LoginPage
   let payBillsNavBarPage: PayBillsNavBarPage
