@@ -19,27 +19,28 @@ export class TopBarMenuLoggedInUserPage {
     this.onlineStatementsTab = page.locator('#pay_bills_tab')
   }
 
-  async clickAccountSummaryTab() {
-    await this.accountSummaryTab.click()
-  }
-
-  async clickAccountActivityTab() {
-    await this.accountActivityTab.click()
-  }
-
-  async clickTransferFundsTab() {
-    await this.transferFundsTab.click()
-  }
-
-  async clickPayBillsTab() {
-    await this.payBillsTab.click()
-  }
-
-  async clickMyMoneyMapTab() {
-    await this.myMoneyMapTab.click()
-  }
-
-  async clickOnlineStatementsTab() {
-    await this.onlineStatementsTab.click()
+  async clickTab(tabname: string) {
+    switch (tabname) {
+      case 'Account Summary':
+        await this.accountSummaryTab.click()
+        break
+      case 'Account Activity':
+        await this.accountActivityTab.click()
+        break
+      case 'Transfer Funds':
+        await this.transferFundsTab.click()
+        break
+      case 'Pay Bills':
+        await this.payBillsTab.click()
+        break
+      case 'My Money App':
+        await this.myMoneyMapTab.click()
+        break
+      case 'Online Statements':
+        await this.onlineStatementsTab.click()
+        break
+      default:
+        throw new Error('Could not find a tab with a given name')
+    }
   }
 }

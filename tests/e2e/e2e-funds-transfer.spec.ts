@@ -23,7 +23,7 @@ test.describe.parallel('Funds transfer tests', () => {
   })
 
   test('Funds transfer from Checking successful scenario', async ({ page }) => {
-    await topBarMenuLoggedInUserPage.clickTransferFundsTab()
+    await topBarMenuLoggedInUserPage.clickTab('Transfer Funds')
     await transferFundsPage.selectOptionFromAccountDropdown('2')
     await transferFundsPage.selectOptionToAccountDropdown('5')
     await transferFundsPage.enterAmountAndDescription('10', 'for Santa')
