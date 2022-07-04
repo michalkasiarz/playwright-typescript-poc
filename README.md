@@ -1,8 +1,8 @@
 # playwright-typescript-poc
 
-:hotsprings: Language: TypeScript  
-:heavy_check_mark: Frameworks: Playwright  
-:books: Dependencies: Prettier
+<img height="24" width="24" src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" /> Language: TypeScript  
+<img height="24" width="24" src="https://playwright.dev/img/playwright-logo.svg" /> Frameworks: Playwright  
+<img height="24" width="24" src="https://unpkg.com/simple-icons@v7/icons/prettier.svg" /> Dependencies: Prettier
 
 # General Description
 
